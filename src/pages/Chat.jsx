@@ -15,10 +15,10 @@ function Chat({ username, course, onStop }) {
     socket.emit("joinQueue", { username, course });
 
     // Listen for messages
-    socket.on("message", ({ sender, text }) => {
+    socket.on("message", ({ sender, text, highlight }) => {
       setMessages((prev) => [
         ...prev,
-        { sender, text, self: sender === username },
+        { sender, text, self: sender === username, highlight },
       ]);
     });
 
@@ -50,7 +50,7 @@ function Chat({ username, course, onStop }) {
       {
         sender: "System",
         text: "⏳ Searching for a new partner...",
-        self: false,
+        highlight: false,
       },
     ]);
 
@@ -62,7 +62,6 @@ function Chat({ username, course, onStop }) {
 
   const handleStop = () => {
     if (!socketRef.current) return;
-
     socketRef.current.emit("leaveChat");
     onStop();
   };
@@ -74,29 +73,29 @@ function Chat({ username, course, onStop }) {
         Chatting as {username} ({course})
       </div>
 
-     {/* Chat Box */}
-<div className="flex-1 overflow-y-auto p-3 flex flex-col gap-2">
-  {messages.map((m, i) => (
-    <div
-      key={i}
-      className={`inline-block max-w-[70%] px-3 py-1.5 rounded-2xl text-sm break-words
-        ${m.sender === "System"
-          ? "bg-transparent text-gray-500 text-center mx-auto italic"
-          : m.self
-            ? "bg-blue-600 text-white self-end rounded-br-md ml-auto"
-            : "bg-gray-200 text-gray-800 self-start rounded-bl-md"
-        }`}
-    >
-      {m.sender !== "System" && !m.self && (
-        <span className="font-semibold mr-1">{m.sender}: </span>
-      )}
-      {m.text}
-    </div>
-  ))}
-  <div ref={messagesEndRef} />
-</div>
-
-
+      {/* Chat Box */}
+      <div className="flex-1 overflow-y-auto p-3 flex flex-col gap-2">
+        {messages.map((m, i) => (
+          <div
+            key={i}
+            className={`max-w-[70%] px-3 py-1.5 rounded-2xl text-sm break-words leading-snug
+              ${m.sender === "System"
+                ? m.highlight
+                  ? "bg-yellow-100 text-yellow-800 font-semibold text-center mx-auto px-4 py-2 rounded-md shadow"
+                  : "bg-transparent text-gray-500 text-center mx-auto italic"
+                : m.self
+                ? "bg-blue-600 text-white self-end rounded-br-md ml-auto"
+                : "bg-gray-200 text-gray-800 self-start rounded-bl-md"
+              }`}
+          >
+            {m.sender !== "System" && !m.self && (
+              <span className="font-semibold mr-1">{m.sender}: </span>
+            )}
+            {m.text}
+          </div>
+        ))}
+        <div ref={messagesEndRef} />
+      </div>
 
       {/* Input Controls */}
       <div className="flex items-center gap-2 border-t border-gray-300 bg-white p-3">
