@@ -8,7 +8,7 @@ function Chat({ username, course, onStop }) {
   const socketRef = useRef(null);
 
   useEffect(() => {
-    const socket = io("http://localhost:3000");
+    const socket = io("https://cpc-chat-backend-1.onrender.com/");
     socketRef.current = socket;
 
     socket.emit("joinQueue", { username, course });
