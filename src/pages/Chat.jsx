@@ -11,8 +11,10 @@ function Chat({ username, course, onStop }) {
     const socket = io("https://cpc-chat-backend-1.onrender.com/");
     socketRef.current = socket;
 
+    // Join queue immediately
     socket.emit("joinQueue", { username, course });
 
+    // Listen for messages
     socket.on("message", ({ sender, text }) => {
       setMessages((prev) => [
         ...prev,
@@ -25,6 +27,7 @@ function Chat({ username, course, onStop }) {
     };
   }, [username, course]);
 
+  // Auto-scroll chat
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
@@ -37,12 +40,29 @@ function Chat({ username, course, onStop }) {
   };
 
   const handleNext = () => {
+    if (!socketRef.current) return;
+
+    // Leave current chat
     socketRef.current.emit("leaveChat");
-    setMessages([]);
-    socketRef.current.emit("joinQueue", { username, course });
+
+    // Reset UI
+    setMessages([
+      {
+        sender: "System",
+        text: "⏳ Searching for a new partner...",
+        self: false,
+      },
+    ]);
+
+    // Rejoin queue
+    setTimeout(() => {
+      socketRef.current.emit("joinQueue", { username, course });
+    }, 200); // small delay ensures server processed leave
   };
 
   const handleStop = () => {
+    if (!socketRef.current) return;
+
     socketRef.current.emit("leaveChat");
     onStop();
   };
@@ -65,7 +85,7 @@ function Chat({ username, course, onStop }) {
                 : "bg-gray-200 text-gray-800 self-start rounded-bl-md"
             }`}
           >
-            {!m.self && (
+            {!m.self && m.sender !== "System" && (
               <span className="font-semibold mr-1">{m.sender}: </span>
             )}
             {m.text}
