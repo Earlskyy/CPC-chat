@@ -21,7 +21,7 @@ function Landing({ onStart }) {
     <div
       className="min-h-screen flex items-center justify-center px-4 bg-cover bg-center relative"
       style={{
-        backgroundImage: "url('./chathublogo.png')",
+        backgroundImage: "url('./CPCSchool.jpg')",
       }}
     >
       {/* Dark overlay */}
