@@ -2,7 +2,7 @@ import { useState } from "react";
 import Landing from "./pages/Landing";
 import Chat from "./pages/Chat";
 import "./index.css";
-import "./App.css";
+
 
 function App() {
   const [userData, setUserData] = useState(null);
