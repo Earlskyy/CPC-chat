@@ -76,10 +76,11 @@ function Chat({ username, course, onStop }) {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-gradient-to-br from-gray-50 to-gray-200 font-sans">
+    <div className="flex flex-col h-screen bg-[#111] text-gray-100 font-sans">
       {/* Header */}
-      <div className="bg-gradient-to-r from-blue-700 to-blue-600 text-white p-4 font-semibold text-center shadow-lg">
-        💬 Chatting as <span className="font-bold">{username}</span> ({course})
+      <div className="bg-[#1c1c1c] text-gray-200 p-4 text-center border-b border-gray-800">
+        <span className="font-semibold">💬 {username}</span>
+        <span className="text-sm text-gray-400"> ({course})</span>
       </div>
 
       {/* Chat Area */}
@@ -87,18 +88,16 @@ function Chat({ username, course, onStop }) {
         {messages.map((m, i) => (
           <div
             key={i}
-            className={`max-w-[75%] px-4 py-2 rounded-2xl text-sm shadow-sm
+            className={`max-w-[70%] px-4 py-2 rounded-2xl text-sm
               ${m.sender === "System"
-                ? m.highlight
-                  ? "bg-yellow-100 text-yellow-800 font-semibold text-center mx-auto"
-                  : "bg-transparent text-gray-500 text-center italic mx-auto"
+                ? "text-gray-500 text-center italic mx-auto"
                 : m.self
                 ? "bg-blue-600 text-white self-end rounded-br-md ml-auto"
-                : "bg-white text-gray-800 self-start rounded-bl-md border border-gray-200"
+                : "bg-[#2a2a2a] text-gray-200 self-start rounded-bl-md"
               }`}
           >
             {m.sender !== "System" && !m.self && (
-              <span className="font-semibold mr-1">{m.sender}: </span>
+              <span className="font-semibold mr-1 text-blue-400">{m.sender}:</span>
             )}
             {m.text}
           </div>
@@ -106,7 +105,7 @@ function Chat({ username, course, onStop }) {
 
         {/* Typing Indicator */}
         {typingUser && (
-          <div className="text-sm text-gray-500 italic ml-2 animate-pulse">
+          <div className="text-sm text-gray-400 italic ml-2 animate-pulse">
             {typingUser} is typing...
           </div>
         )}
@@ -115,12 +114,12 @@ function Chat({ username, course, onStop }) {
       </div>
 
       {/* Input Controls */}
-      <div className="flex items-center gap-2 border-t border-gray-300 bg-white p-3 shadow-inner">
+      <div className="flex items-center gap-2 border-t border-gray-800 bg-[#1c1c1c] p-3">
         <input
           value={message}
           onChange={handleTyping}
           placeholder="Type a message..."
-          className="flex-1 px-4 py-2 border rounded-full shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-blue-500 outline-none"
+          className="flex-1 px-4 py-2 bg-[#2a2a2a] border border-gray-700 rounded-full text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               e.preventDefault();
@@ -130,23 +129,23 @@ function Chat({ username, course, onStop }) {
         />
         <button
           onClick={sendMessage}
-          className="bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center text-lg shadow-md transition transform hover:scale-105"
+          className="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600 hover:bg-blue-500 transition"
         >
           ➤
         </button>
       </div>
 
       {/* Action Buttons */}
-      <div className="flex gap-3 p-3 border-t border-gray-200 bg-gray-100 shadow-inner">
+      <div className="flex gap-2 p-3 border-t border-gray-800 bg-[#1c1c1c]">
         <button
           onClick={handleNext}
-          className="flex-1 py-3 rounded-xl bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-white font-semibold shadow-md transition transform hover:scale-[1.02]"
+          className="flex-1 py-2 rounded-md bg-[#2a2a2a] hover:bg-[#333] text-gray-300 text-sm transition"
         >
           ⏭ Next
         </button>
         <button
           onClick={handleStop}
-          className="flex-1 py-3 rounded-xl bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white font-semibold shadow-md transition transform hover:scale-[1.02]"
+          className="flex-1 py-2 rounded-md bg-[#2a2a2a] hover:bg-[#333] text-gray-300 text-sm transition"
         >
           ⛔ Stop
         </button>

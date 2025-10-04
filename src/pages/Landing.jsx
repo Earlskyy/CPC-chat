@@ -18,62 +18,55 @@ function Landing({ onStart }) {
   };
 
   return (
-    <div
-      className="min-h-screen flex items-center justify-center px-4 bg-cover bg-center relative"
-      style={{
-        backgroundImage: "url('./CPCSchool.jpg')",
-      }}
-    >
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-900/80 to-indigo-800/70"></div>
-
+    <div className="min-h-screen flex items-center justify-center bg-[#0f0f0f] text-gray-200 px-4">
       {/* Card Content */}
-      <div className="relative bg-white/20 backdrop-blur-md shadow-2xl rounded-2xl p-8 w-full max-w-lg text-center border border-white/30">
+      <div className="relative bg-[#1a1a1a] border border-gray-800 rounded-2xl p-8 w-full max-w-md shadow-xl">
         {/* Title */}
-        <h1 className="text-4xl font-extrabold text-white mb-4 tracking-tight drop-shadow-lg">
-          CPC CHAT HUB
+        <h1 className="text-3xl font-bold text-center mb-4 text-blue-500">
+          CPC Chat Hub
         </h1>
 
         {/* Intro */}
-        <p className="text-white/90 text-sm mb-4 leading-relaxed">
-          <span className="font-semibold">What is CPC Chat Hub?</span><br />
-          CPC Chat Hub is an anonymous chat platform for Cordova Public College
-          students. Connect with classmates, share knowledge, and build
-          friendships across departments.
+        <p className="text-gray-400 text-sm text-center mb-6">
+          An <span className="text-gray-200 font-semibold">anonymous chat platform</span> 
+          for Cordova Public College students.  
+          Connect, share knowledge, and make friends across departments.
         </p>
 
         {/* Disclaimer box */}
-        <div className="bg-white/80 border border-gray-300/50 rounded-lg p-3 h-28 overflow-y-auto text-xs text-left text-gray-700 mb-4">
-          <p className="mb-1 font-semibold">Disclaimer & Terms:</p>
-          <p>• This platform is for educational and social interaction only.</p>
-          <p>• Do not share sensitive, offensive, or inappropriate content.</p>
-          <p>• Misuse of this app may result in restrictions or reporting.</p>
-          <p>• By continuing, you agree to these Terms & Conditions.</p>
+        <div className="bg-[#111] border border-gray-700 rounded-lg p-3 h-28 overflow-y-auto text-xs text-gray-400 mb-4">
+          <p className="mb-1 text-gray-300 font-semibold">Disclaimer & Terms:</p>
+          <p>• For educational & social use only.</p>
+          <p>• No offensive, harmful, or sensitive content.</p>
+          <p>• Misuse may lead to restrictions or reporting.</p>
+          <p>• By continuing, you agree to these Terms.</p>
         </div>
 
         {/* Agreement */}
-        <div className="flex items-center justify-start gap-2 mb-4 text-sm text-white">
+        <div className="flex items-center gap-2 mb-4 text-sm">
           <input
             type="checkbox"
             id="agree"
             checked={agreed}
             onChange={(e) => setAgreed(e.target.checked)}
-            className="h-4 w-4"
+            className="h-4 w-4 text-blue-500 focus:ring-blue-400 border-gray-600 bg-[#1a1a1a]"
           />
-          <label htmlFor="agree">I agree to the disclaimer & terms</label>
+          <label htmlFor="agree" className="text-gray-300">
+            I agree to the disclaimer & terms
+          </label>
         </div>
 
         {/* Username input */}
         <input
           type="text"
           placeholder="Enter username"
-          className="w-full px-4 py-3 rounded-xl border border-gray-300/50 bg-white/90 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-300 outline-none transition mb-3"
+          className="w-full px-4 py-3 mb-3 rounded-lg border border-gray-700 bg-[#111] text-gray-200 placeholder-gray-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
           onChange={(e) => setUsername(e.target.value)}
         />
 
         {/* Course selection */}
         <select
-          className="w-full px-4 py-3 rounded-xl border border-gray-300/50 bg-white/90 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-300 outline-none transition mb-6"
+          className="w-full px-4 py-3 mb-6 rounded-lg border border-gray-700 bg-[#111] text-gray-200 focus:ring-1 focus:ring-blue-500 focus:outline-none"
           onChange={(e) => setCourse(e.target.value)}
         >
           <option value="">Select Course/Dept</option>
@@ -87,10 +80,10 @@ function Landing({ onStart }) {
         <button
           onClick={handleStart}
           disabled={!agreed}
-          className={`w-full py-3 rounded-xl font-semibold text-lg shadow-lg transition transform hover:scale-[1.02] ${
+          className={`w-full py-3 rounded-lg font-medium text-sm transition ${
             agreed
-              ? "bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white"
-              : "bg-gray-400 text-gray-200 cursor-not-allowed"
+              ? "bg-blue-600 hover:bg-blue-500 text-white"
+              : "bg-gray-700 text-gray-500 cursor-not-allowed"
           }`}
         >
           🚀 Start Chatting
