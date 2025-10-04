@@ -7,10 +7,10 @@ function Landing({ onStart }) {
 
 
   const courseLogos = {
-    BSIT: "./bsitlogo.jpg", // Example IT logo
-    BSEd: "./bsedlogo.jpg", // Example Education logo
-    BEEd: "./beedlogo.jpg", // Example Elementary logo
-    BSHM: "./bshmlogo.jpg", // Example Hospitality logo
+    BSIT: "./bsit_logo-removebg-preview.png", 
+    BSEd: "./bsedlogo-removebg-preview.png", 
+    BEEd: "./beed_logo-removebg-preview.png", 
+    BSHM: "./bshm_logo-removebg-preview.png", 
   };
 
   const handleStart = () => {
