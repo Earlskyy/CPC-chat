@@ -5,6 +5,14 @@ function Landing({ onStart }) {
   const [course, setCourse] = useState("");
   const [agreed, setAgreed] = useState(false);
 
+
+  const courseLogos = {
+    BSIT: "./bsitlogo.jpg", // Example IT logo
+    BSEd: "./bsedlogo.jpg", // Example Education logo
+    BEEd: "./beedlogo.jpg", // Example Elementary logo
+    BSHM: "./bshmlogo.jpg", // Example Hospitality logo
+  };
+
   const handleStart = () => {
     if (!username || !course) {
       alert("Please enter your username and select a course.");
@@ -66,7 +74,7 @@ function Landing({ onStart }) {
 
         {/* Course selection */}
         <select
-          className="w-full px-4 py-3 mb-6 rounded-lg border border-gray-700 bg-[#111] text-gray-200 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+          className="w-full px-4 py-3 rounded-lg border border-gray-700 bg-[#111] text-gray-200 focus:ring-1 focus:ring-blue-500 focus:outline-none"
           onChange={(e) => setCourse(e.target.value)}
         >
           <option value="">Select Course/Dept</option>
@@ -76,11 +84,22 @@ function Landing({ onStart }) {
           <option value="BSHM">BSHM</option>
         </select>
 
+        {/* Show Logo */}
+        {course && courseLogos[course] && (
+          <div className="flex justify-center my-4">
+            <img
+              src={courseLogos[course]}
+              alt={`${course} logo`}
+              className="w-20 h-20 object-contain rounded-lg shadow-md border border-gray-700 bg-[#0f0f0f] p-2"
+            />
+          </div>
+        )}
+
         {/* Start button */}
         <button
           onClick={handleStart}
           disabled={!agreed}
-          className={`w-full py-3 rounded-lg font-medium text-sm transition ${
+          className={`w-full py-3 mt-4 rounded-lg font-medium text-sm transition ${
             agreed
               ? "bg-blue-600 hover:bg-blue-500 text-white"
               : "bg-gray-700 text-gray-500 cursor-not-allowed"
