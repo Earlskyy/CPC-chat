@@ -28,7 +28,7 @@ function Landing({ onStart }) {
 
         {/* Intro */}
         <p className="text-gray-400 text-sm text-center mb-6">
-          An <span className="text-gray-200 font-semibold">anonymous chat platform</span> 
+          An <span className="text-gray-200 font-semibold"> anonymous chat platform </span> 
           for Cordova Public College students.  
           Connect, share knowledge, and make friends across departments.
         </p>
