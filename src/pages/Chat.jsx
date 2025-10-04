@@ -76,7 +76,7 @@ function Chat({ username, course, onStop }) {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-[#111] text-gray-100 font-sans">
+    <div className="flex flex-col h-[100dvh] bg-[#111] text-gray-100 font-sans">
       {/* Header */}
       <div className="bg-[#1c1c1c] text-gray-300 p-4 text-center border-b border-gray-800 text-sm">
         You are chatting as{" "}
@@ -88,8 +88,6 @@ function Chat({ username, course, onStop }) {
       <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-3">
         {messages.map((m, i) => {
           const isSystem = m.sender === "System";
-
-          // Special highlight for "Connected with ..." system messages
           const isConnectedMsg =
             isSystem && m.text.toLowerCase().includes("connected with");
 
@@ -125,7 +123,7 @@ function Chat({ username, course, onStop }) {
       </div>
 
       {/* Input Controls */}
-      <div className="flex items-center gap-2 border-t border-gray-800 bg-[#1c1c1c] p-3">
+      <div className="sticky bottom-0 flex items-center gap-2 border-t border-gray-800 bg-[#1c1c1c] p-3 pb-[env(safe-area-inset-bottom)]">
         <input
           value={message}
           onChange={handleTyping}
@@ -147,7 +145,7 @@ function Chat({ username, course, onStop }) {
       </div>
 
       {/* Action Buttons */}
-      <div className="flex gap-2 p-3 border-t border-gray-800 bg-[#1c1c1c]">
+      <div className="sticky bottom-0 flex gap-2 p-3 border-t border-gray-800 bg-[#1c1c1c] pb-[env(safe-area-inset-bottom)]">
         <button
           onClick={handleNext}
           className="flex-1 py-2 rounded-md bg-[#2a2a2a] hover:bg-[#333] text-gray-300 text-sm transition"
